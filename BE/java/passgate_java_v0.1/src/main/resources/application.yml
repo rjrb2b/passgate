@@ -1,0 +1,42 @@
+server: 
+  port: 8080
+  servlet:
+    context-path: /passgate/be/v0.1
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/passgate_db
+    username: passgate_db
+    password: passgate_db
+    hikari:
+      maximum-lifetime: 300000
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQLDialect
+      ddl-auto: none #none create-drop update
+    generate-ddl: false
+    show-sql: false
+    
+logging:
+  level:
+    root: WARN
+    org.springframework.web: WARN
+    rjr.studio.passgate: INFO 
+  file:
+    name: /00_logs/passgate_db/logfile.log
+    max-size: 10MB
+    max-history: 10
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+        
+app:
+  jwt:
+    expirationInMs: 1800000 # 30 minuti
+    expirationTimeDeltaInMs: 300000 # 5 minuti
+    key:
+      private: Y2lhb2NpYW9jaWFvY2lhb2NpYW8 # ciaociaociaociaociao
+      public: Y2lhb2NpYW9jaWFvY2lhb2NpYW8 # ciaociaociaociaociao
