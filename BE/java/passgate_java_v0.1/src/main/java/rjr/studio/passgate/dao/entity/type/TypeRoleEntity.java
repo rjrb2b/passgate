@@ -13,7 +13,7 @@ import lombok.Data;
 public class TypeRoleEntity {
 
 	@Id
-	@Column(name = "CODE", nullable = false, length = 5)
+	@Column(name = "CODE", nullable = false, length = 7)
 	private String code;
 	@Column(name = "NAME", nullable = false, length = 25)
 	private String name;
