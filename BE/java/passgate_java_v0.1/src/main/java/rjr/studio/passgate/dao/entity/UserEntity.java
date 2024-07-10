@@ -10,11 +10,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import rjr.studio.passgate.dao.entity.type.TypeRoleEntity;
 
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "ACCOUNTS")

@@ -10,7 +10,7 @@ import rjr.studio.passgate.dao.entity.UserEntity;
 import rjr.studio.passgate.dao.service.UserService;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/user")
 public class UserController {
 
 	private final UserService userService;
@@ -22,34 +22,50 @@ public class UserController {
 	}
 
 	@GetMapping("")
-	public String test() {
-		return "Applicazione online!";
-	}
-
-	@GetMapping("/user")
 	public ResponseEntity<List<UserEntity>> findAll() throws Exception {
 		List<UserEntity> entities = userService.findAll();
 		return new ResponseEntity<>(entities, HttpStatus.OK);
 	}
 
-	@GetMapping("/user/byId/{id}")
+	@GetMapping("/byId/{id}")
 	public ResponseEntity<UserEntity> findById(@PathVariable(value = "id", required = true) Integer id)
 			throws Exception {
 		UserEntity entity = userService.findById(id);
 		return new ResponseEntity<>(entity, HttpStatus.OK);
 	}
 
-	@GetMapping("/user/byUsername/{username}")
+	@GetMapping("/byUsername/{username}")
 	public ResponseEntity<UserEntity> findByUsername(@PathVariable(value = "username", required = true) String username)
 			throws Exception {
 		UserEntity entity = userService.findByUsername(username);
 		return new ResponseEntity<>(entity, HttpStatus.OK);
 	}
 
-	@PostMapping("/user")
-	public ResponseEntity<UserEntity> registerUser(@RequestBody UserEntity user) throws Exception {
+	@PostMapping("")
+	public ResponseEntity<UserEntity> registerUser(@RequestBody(required = true) UserEntity user) throws Exception {
 		UserEntity savedUser = userService.save(user);
 		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<UserEntity> updateUser(@PathVariable(value = "id", required = true) Integer id,
+			@RequestBody(required = true) UserEntity user) throws Exception {
+		UserEntity updateUser = userService.put(id, user);
+		return new ResponseEntity<>(updateUser, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/byId/{id}")
+	public ResponseEntity<Boolean> deleteById(@PathVariable(value = "id", required = true) Integer id)
+			throws Exception {
+		userService.deleteById(id);
+		return new ResponseEntity<>(true, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/byUsername/{username}")
+	public ResponseEntity<Boolean> deleteByUsername(@PathVariable(value = "username", required = true) String username)
+			throws Exception {
+		userService.deleteByUsername(username);
+		return new ResponseEntity<>(true, HttpStatus.OK);
 	}
 
 }
