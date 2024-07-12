@@ -1,25 +1,18 @@
 package rjr.studio.passgate.dao.entity.type;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@Data
-@Builder
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 @Entity
 @Table(name = "TYPES_ROLE")
-public class TypeRoleEntity {
+public class TypeRoleEntity extends TypeBaseEntity {
 
-	@Id
-	@Column(name = "CODE", nullable = false, length = 7)
-	private String code;
-	@Column(name = "NAME", nullable = false, length = 25)
-	private String name;
-	@Column(name = "DESCRIPTION", nullable = false, length = 255)
-	private String description;
 
 }

@@ -13,6 +13,7 @@ import rjr.studio.passgate.conf.security.SecurityUtility;
 import rjr.studio.passgate.dao.entity.UserEntity;
 import rjr.studio.passgate.dao.entity.type.TypeRoleEntity;
 import rjr.studio.passgate.dao.repository.UserRepository;
+import rjr.studio.passgate.utility.ObjectUtility;
 
 @Service
 public class UserService {
@@ -53,17 +54,19 @@ public class UserService {
 		}
 	}
 
-	public UserEntity put(Integer id, UserEntity user) {
+	public UserEntity put(Integer id, UserEntity updateEntity) throws InstantiationException, IllegalAccessException, Exception {
 
 		UserEntity oldEntity = this.findById(id);
+		
+		UserEntity newEntity = ObjectUtility.mergeOldNew(oldEntity, updateEntity);
 
-		user.setPassword(oldEntity.getPassword());
+//		newEntity.setPassword(oldEntity.getPassword());
+//
+//		if (null == newEntity.getRoles() || newEntity.getRoles().isEmpty()) {
+//			newEntity.setRoles(oldEntity.getRoles());
+//		}
 
-		if (null == user.getRoles() || user.getRoles().isEmpty()) {
-			user.setRoles(oldEntity.getRoles());
-		}
-
-		return userRepository.save(user);
+		return userRepository.save(newEntity);
 	}
 
 	public UserEntity updatePassword(String username, String oldPassword, String newPassword) {

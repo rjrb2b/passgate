@@ -49,8 +49,8 @@ public class UserController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<UserEntity> updateUser(@PathVariable(value = "id", required = true) Integer id,
-			@RequestBody(required = true) UserEntity user) throws Exception {
-		UserEntity updateUser = userService.put(id, user);
+			@RequestBody(required = true) UserEntity updateEntity) throws Exception {
+		UserEntity updateUser = userService.put(id, updateEntity);
 		return new ResponseEntity<>(updateUser, HttpStatus.OK);
 	}
 

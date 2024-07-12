@@ -10,12 +10,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import rjr.studio.passgate.dao.entity.type.TypeRoleEntity;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @EqualsAndHashCode(callSuper = false)
 @Entity
@@ -34,6 +38,7 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "PASSWORD", nullable = false, length = 255)
 	@Size(min = 8, message = "The password length must be at least 8 characters")
 	private String password;
+	
 	@ManyToMany
     @JoinTable(
         name = "ACCOUNTS_ROLES",
