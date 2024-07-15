@@ -6,7 +6,6 @@ import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import rjr.studio.passgate.conf.security.SecurityUtility;
@@ -40,7 +39,7 @@ public class UserService {
 
 	public UserEntity findByUsername(String username) {
 		return userRepository.findByUsername(username)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+				.orElseThrow(() -> new EntityNotFoundException("User not found with username: " + username));
 	}
 
 	public UserEntity save(UserEntity user) {
