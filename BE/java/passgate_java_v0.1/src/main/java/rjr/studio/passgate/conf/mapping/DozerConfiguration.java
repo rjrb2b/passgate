@@ -22,7 +22,6 @@ public class DozerConfiguration {
 
 	@Autowired
 	public DozerConfiguration(DozerProperties properties, List<DozerMapping> builders) {
-		super();
 		this.properties = properties;
 		this.builders = builders;
 	}

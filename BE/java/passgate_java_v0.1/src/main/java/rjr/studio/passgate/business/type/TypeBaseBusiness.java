@@ -9,10 +9,15 @@ import rjr.studio.passgate.dao.entity.type.TypeBaseEntity;
 public interface TypeBaseBusiness<E extends TypeBaseEntity, M extends TypeBaseModel, C extends Serializable> {
 	
 	List<M> findAll();
+	
 	M findByCode(C code);
+	
 	M findByName(String name);
+	
 	C save(M model);
+	
 	C updateByCode(C code, M model) throws Exception;
+	
 	C deleteByCode(C code);
 
 }

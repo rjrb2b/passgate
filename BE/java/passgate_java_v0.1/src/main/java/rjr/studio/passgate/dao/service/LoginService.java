@@ -14,7 +14,6 @@ public class LoginService {
 	
 	@Autowired
 	public LoginService(UserService userService, SecurityUtility securityUtility) {
-		super();
 		this.userService = userService;
 		this.securityUtility = securityUtility;
 	}

@@ -2,70 +2,36 @@ package rjr.studio.passgate.api.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rjr.studio.passgate.dao.entity.UserEntity;
-import rjr.studio.passgate.dao.service.UserService;
 
-@RestController
+import rjr.studio.passgate.api.view.model.User;
+
 @RequestMapping("/user")
-public class UserController {
-
-	private final UserService userService;
-
-	@Autowired
-	public UserController(UserService userService) {
-		super();
-		this.userService = userService;
-	}
+public interface UserController {
 
 	@GetMapping("")
-	public ResponseEntity<List<UserEntity>> findAll() throws Exception {
-		List<UserEntity> entities = userService.findAll();
-		return new ResponseEntity<>(entities, HttpStatus.OK);
-	}
+	ResponseEntity<List<User>> findAll() throws Exception;
 
 	@GetMapping("/byId/{id}")
-	public ResponseEntity<UserEntity> findById(@PathVariable(value = "id", required = true) Integer id)
-			throws Exception {
-		UserEntity entity = userService.findById(id);
-		return new ResponseEntity<>(entity, HttpStatus.OK);
-	}
+	ResponseEntity<User> findById(@PathVariable(value = "id", required = true) Integer id) throws Exception;
 
 	@GetMapping("/byUsername/{username}")
-	public ResponseEntity<UserEntity> findByUsername(@PathVariable(value = "username", required = true) String username)
-			throws Exception {
-		UserEntity entity = userService.findByUsername(username);
-		return new ResponseEntity<>(entity, HttpStatus.OK);
-	}
+	ResponseEntity<User> findByUsername(@PathVariable(value = "username", required = true) String username)
+			throws Exception;
 
 	@PostMapping("")
-	public ResponseEntity<UserEntity> registerUser(@RequestBody(required = true) UserEntity user) throws Exception {
-		UserEntity savedUser = userService.save(user);
-		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
-	}
+	ResponseEntity<User> save(@RequestBody(required = true) User user) throws Exception;
 
 	@PutMapping("/{id}")
-	public ResponseEntity<UserEntity> updateUser(@PathVariable(value = "id", required = true) Integer id,
-			@RequestBody(required = true) UserEntity updateEntity) throws Exception {
-		UserEntity updateUser = userService.put(id, updateEntity);
-		return new ResponseEntity<>(updateUser, HttpStatus.OK);
-	}
+	ResponseEntity<User> put(@PathVariable(value = "id", required = true) Integer id,
+			@RequestBody(required = true) User user) throws Exception;
 
 	@DeleteMapping("/byId/{id}")
-	public ResponseEntity<Boolean> deleteById(@PathVariable(value = "id", required = true) Integer id)
-			throws Exception {
-		userService.deleteById(id);
-		return new ResponseEntity<>(true, HttpStatus.OK);
-	}
+	ResponseEntity<Boolean> deleteById(@PathVariable(value = "id", required = true) Integer id) throws Exception;
 
 	@DeleteMapping("/byUsername/{username}")
-	public ResponseEntity<Boolean> deleteByUsername(@PathVariable(value = "username", required = true) String username)
-			throws Exception {
-		userService.deleteByUsername(username);
-		return new ResponseEntity<>(true, HttpStatus.OK);
-	}
+	ResponseEntity<Boolean> deleteByUsername(@PathVariable(value = "username", required = true) String username)
+			throws Exception;
 
 }

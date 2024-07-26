@@ -14,7 +14,6 @@ public class SecurityUtility {
 
 	@Autowired
 	public SecurityUtility(BCryptPasswordEncoder passwordEncoder) {
-		super();
 		this.passwordEncoder = passwordEncoder;
 	}
 
