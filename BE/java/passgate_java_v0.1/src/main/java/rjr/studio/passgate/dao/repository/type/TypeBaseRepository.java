@@ -9,7 +9,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import rjr.studio.passgate.dao.entity.type.TypeBaseEntity;
 
 @NoRepositoryBean
-public interface TypeBaseRepository<E extends TypeBaseEntity, CODE extends Serializable> extends JpaRepository<E, CODE>  {
+public interface TypeBaseRepository<E extends TypeBaseEntity, C extends Serializable> extends JpaRepository<E, C>  {
 	
 	Optional<E> findByName(String name);
 

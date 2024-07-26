@@ -1,4 +1,4 @@
-package rjr.studio.passgate.conf.mapping.entity2view.type;
+package rjr.studio.passgate.api.view.model.type;
 
 import javax.persistence.MappedSuperclass;
 
@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @MappedSuperclass
-public abstract class TypeBase {
+public abstract class TypeBaseModel {
 
 	private String code;
 	private String name;

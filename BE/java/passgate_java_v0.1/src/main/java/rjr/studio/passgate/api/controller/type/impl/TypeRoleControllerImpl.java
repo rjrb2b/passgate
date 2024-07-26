@@ -8,35 +8,36 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import rjr.studio.passgate.api.controller.type.TypeRoleController;
+import rjr.studio.passgate.api.view.model.type.TypeRole;
+import rjr.studio.passgate.business.type.TypeBaseBusiness;
 import rjr.studio.passgate.dao.entity.type.TypeRoleEntity;
-import rjr.studio.passgate.dao.service.type.TypeBaseCrudService;
 
 @RestController
 public class TypeRoleControllerImpl implements TypeRoleController {
 
-	private TypeBaseCrudService<TypeRoleEntity, String> service;
+	private TypeBaseBusiness<TypeRoleEntity, TypeRole, String> service;
 
 	@Autowired
-	public TypeRoleControllerImpl(TypeBaseCrudService<TypeRoleEntity, String> service) {
+	public TypeRoleControllerImpl(TypeBaseBusiness<TypeRoleEntity, TypeRole, String> service) {
 		this.service = service;
 	}
 
 	@Override
-	public ResponseEntity<List<TypeRoleEntity>> findAll() {
-		List<TypeRoleEntity> entities = service.findAll();
-		return new ResponseEntity<>(entities, HttpStatus.OK);
+	public ResponseEntity<List<TypeRole>> findAll() {
+		List<TypeRole> rtn = service.findAll();
+		return new ResponseEntity<>(rtn, HttpStatus.OK);
 	}
 
 	@Override
-	public ResponseEntity<TypeRoleEntity> findByCode(String code) {
-		TypeRoleEntity entity = service.findByCode(TypeRoleEntity.class, code);
-		return new ResponseEntity<>(entity, HttpStatus.OK);
+	public ResponseEntity<TypeRole> findByCode(String code) {
+		TypeRole rtn = service.findByCode(code);
+		return new ResponseEntity<>(rtn, HttpStatus.OK);
 	}
 	
 	@Override
-	public ResponseEntity<TypeRoleEntity> findByName(String name) {
-		TypeRoleEntity entity = service.findByName(TypeRoleEntity.class, name);
-		return new ResponseEntity<>(entity, HttpStatus.OK);
+	public ResponseEntity<TypeRole> findByName(String name) {
+		TypeRole rtn = service.findByName(name);
+		return new ResponseEntity<>(rtn, HttpStatus.OK);
 	}
 
 }
