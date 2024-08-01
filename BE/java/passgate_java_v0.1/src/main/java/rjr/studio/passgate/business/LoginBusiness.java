@@ -4,8 +4,8 @@ import rjr.studio.passgate.api.view.model.LoginRequest;
 
 public interface LoginBusiness {
 
-	void passwordMatch(LoginRequest loginrRequest);
-	
+	String passwordMatch(LoginRequest loginrRequest);
+
 	void passwordChange(LoginRequest loginrRequest);
-	
+
 }

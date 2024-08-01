@@ -1,5 +1,7 @@
 package rjr.studio.passgate.api.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,6 @@ public interface LoginController {
 	ResponseEntity<Boolean> passwordMatch(@RequestBody(required = true) LoginRequest loginrRequest);
 	
 	@PostMapping("/change")
-	ResponseEntity<Boolean> passwordChange(@RequestBody(required = true) LoginRequest loginrRequest);
+	ResponseEntity<Boolean> passwordChange(HttpServletRequest request, @RequestBody(required = true) LoginRequest loginrRequest);
 	
 }

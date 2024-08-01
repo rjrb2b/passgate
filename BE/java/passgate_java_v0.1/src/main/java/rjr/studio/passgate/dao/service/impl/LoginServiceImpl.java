@@ -14,6 +14,7 @@ public class LoginServiceImpl implements LoginService {
 	private final UserService userService;
 	private final SecurityUtility securityUtility;
 	
+	
 	@Autowired
 	public LoginServiceImpl(UserService userService, SecurityUtility securityUtility) {
 		this.userService = userService;

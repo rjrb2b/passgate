@@ -1,7 +1,5 @@
 package rjr.studio.passgate.conf.security;
 
-import java.util.Objects;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,15 +14,17 @@ public class SecurityUtility {
 	public SecurityUtility(BCryptPasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
 	}
+	
+	public String passwordEncoder(String password) {
+		return passwordEncoder.encode(password);
+	}
 
-	public void chekPassword(String username, String userPassword, String dbPassword) {
-
-		if (null == userPassword || Objects.equals(passwordEncoder(userPassword), dbPassword)) {
+	public void passwordMatches(String username, String userPassword, String dbPassword) {
+		
+		if (null == userPassword || !passwordEncoder.matches(userPassword, dbPassword)) {
 			throw new BadCredentialsException("The username " + username + " and password entered are not correct");
 		}
 	}
 
-	public String passwordEncoder(String password) {
-		return passwordEncoder.encode(password);
-	}
+
 }
