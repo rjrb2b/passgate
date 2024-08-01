@@ -11,14 +11,12 @@ public interface UserService {
 
 	UserEntity findByUsername(String username);
 
-	UserEntity save(UserEntity user);
+	UserEntity save(UserEntity userEntity, String password);
 
-	UserEntity put(Integer id, UserEntity updateEntity) throws InstantiationException, IllegalAccessException, Exception;
-
-	UserEntity updatePassword(String username, String oldPassword, String newPassword);
+	UserEntity put(Integer id, UserEntity userEntity) throws InstantiationException, IllegalAccessException, Exception;
 
 	void deleteById(Integer id);
 	
-	void deleteByUsername(String username);;
+	void deleteByUsername(String username);
 
 }

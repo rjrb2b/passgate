@@ -3,6 +3,7 @@ package rjr.studio.passgate.business.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import rjr.studio.passgate.api.view.model.User;
@@ -40,8 +41,13 @@ public class UserBusinessImpl implements UserBusiness {
 
 	@Override
 	public User save(User user) throws Exception {
-		UserEntity userEntity = entity2Model.mapper(user, UserEntity.class);
-		return entity2Model.mapper(userService.save(userEntity), User.class);
+
+		if (null != userService.findByUsername(user.getUsername())) {
+			throw new DataIntegrityViolationException("Username '" + user.getUsername() + "' already exists");
+		} else {
+			UserEntity userEntity = entity2Model.mapper(user, UserEntity.class);
+			return entity2Model.mapper(userService.save(userEntity, user.getPassword()), User.class);
+		}
 	}
 
 	@Override

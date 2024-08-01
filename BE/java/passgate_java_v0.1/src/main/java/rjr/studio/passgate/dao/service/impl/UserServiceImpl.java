@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import rjr.studio.passgate.conf.security.SecurityUtility;
@@ -46,43 +45,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserEntity save(UserEntity user) {
-		if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-			throw new DataIntegrityViolationException("Username '" + user.getUsername() + "' already exists");
-		} else {
-			String encodedPassword = securityUtility.passwordEncoder(user.getPassword());
-			user.setPassword(encodedPassword);
-			this.checkRoles(user);
-			return userRepository.save(user);
-		}
+	public UserEntity save(UserEntity userEntity, String password) {
+
+			String encodedPassword = securityUtility.passwordEncoder(password);
+			userEntity.setPassword(encodedPassword);
+			this.checkRoles(userEntity);
+			return userRepository.save(userEntity);
+			
 	}
 
 	@Override
-	public UserEntity put(Integer id, UserEntity updateEntity) throws InstantiationException, IllegalAccessException, Exception {
+	public UserEntity put(Integer id, UserEntity userEntity) throws InstantiationException, IllegalAccessException, Exception {
 
 		UserEntity oldEntity = this.findById(id);
 		
-		UserEntity newEntity = ObjectUtility.mergeOldNew(oldEntity, updateEntity);
-
-//		newEntity.setPassword(oldEntity.getPassword());
-//
-//		if (null == newEntity.getRoles() || newEntity.getRoles().isEmpty()) {
-//			newEntity.setRoles(oldEntity.getRoles());
-//		}
+		UserEntity newEntity = ObjectUtility.mergeOldNew(oldEntity, userEntity);
 
 		return userRepository.save(newEntity);
-	}
-
-	@Override
-	public UserEntity updatePassword(String username, String oldPassword, String newPassword) {
-
-		UserEntity userEntity = this.findByUsername(username); 
-		
-		securityUtility.chekPassword(username, oldPassword, userEntity.getPassword());
-
-		userEntity.setPassword(securityUtility.passwordEncoder(newPassword));
-
-		return userRepository.save(userEntity);
 	}
 
 	@Override
