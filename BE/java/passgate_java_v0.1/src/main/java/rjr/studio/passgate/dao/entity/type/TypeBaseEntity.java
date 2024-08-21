@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @MappedSuperclass
-public abstract class TypeBaseEntity {
+public class TypeBaseEntity {
 
 	@Id
 	@Column(name = "CODE", nullable = false, length = 7)

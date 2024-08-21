@@ -1,0 +1,6 @@
+"TypesRole","ADMIN","ROLE_ADMIN","Amministratore del sistema"
+"TypesRole","GUEST","ROLE_GUEST","Utente ospite"
+"TypesRole","SYSTEM","ROLE_SYSTEM","Sistemista del sistema"
+"TypesRole","USER","ROLE_USER","Utente generico"
+"TypesApp","LIB24","LIBRARY_2024","App per gestire una libreria"
+"TypesApp","PG24","PASSGATE_2024","App per gestire gli utenti e l'accesso alle applicazioni"

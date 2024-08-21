@@ -1,4 +1,4 @@
-package rjr.studio.passgate.api.view.model;
+package rjr.studio.passgate.api.view;
 
 import javax.persistence.MappedSuperclass;
 

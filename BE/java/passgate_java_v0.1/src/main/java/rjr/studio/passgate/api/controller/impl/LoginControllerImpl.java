@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import rjr.studio.passgate.api.controller.LoginController;
-import rjr.studio.passgate.api.view.model.LoginRequest;
+import rjr.studio.passgate.api.view.LoginRequest;
 import rjr.studio.passgate.business.LoginBusiness;
 
 @RestController

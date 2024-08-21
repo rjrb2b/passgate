@@ -3,7 +3,7 @@ package rjr.studio.passgate.business.type.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import rjr.studio.passgate.api.view.model.type.TypeRole;
+import rjr.studio.passgate.api.view.type.TypeRole;
 import rjr.studio.passgate.conf.mapping.Entity2Model;
 import rjr.studio.passgate.dao.entity.type.TypeRoleEntity;
 import rjr.studio.passgate.dao.service.type.TypeBaseService;

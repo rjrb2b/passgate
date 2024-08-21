@@ -1,6 +1,6 @@
 package rjr.studio.passgate.business;
 
-import rjr.studio.passgate.api.view.model.LoginRequest;
+import rjr.studio.passgate.api.view.LoginRequest;
 
 public interface LoginBusiness {
 

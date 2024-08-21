@@ -2,15 +2,18 @@ package rjr.studio.passgate.api.controller;
 
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import rjr.studio.passgate.api.view.model.User;
+import rjr.studio.passgate.api.view.User;
 
 @RequestMapping("/user")
 public interface UserController {
 
 	@GetMapping("")
+	@PermitAll
 	ResponseEntity<List<User>> findAll() throws Exception;
 
 	@GetMapping("/byId/{id}")

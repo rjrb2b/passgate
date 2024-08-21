@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import rjr.studio.passgate.api.view.model.LoginRequest;
+import rjr.studio.passgate.api.view.LoginRequest;
 
 @RequestMapping("/login")
 public interface LoginController {

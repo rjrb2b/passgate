@@ -2,7 +2,7 @@ package rjr.studio.passgate.business;
 
 import java.util.List;
 
-import rjr.studio.passgate.api.view.model.User;
+import rjr.studio.passgate.api.view.User;
 
 public interface UserBusiness {
 

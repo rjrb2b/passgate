@@ -1,13 +1,14 @@
 package rjr.studio.passgate.business.type.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import rjr.studio.passgate.api.view.model.type.TypeBaseModel;
+import rjr.studio.passgate.api.view.type.TypeBaseModel;
 import rjr.studio.passgate.business.type.TypeBaseBusiness;
 import rjr.studio.passgate.conf.mapping.Entity2Model;
 import rjr.studio.passgate.dao.entity.type.TypeBaseEntity;
@@ -18,8 +19,8 @@ import rjr.studio.passgate.utility.ObjectUtility;
 public abstract class TypeBaseBusinessImpl<E extends TypeBaseEntity, M extends TypeBaseModel, C extends Serializable>
 		implements TypeBaseBusiness<E, M, C> {
 
-	private Entity2Model entity2Model;
-	private TypeBaseService<E, C> service;
+	private final Entity2Model entity2Model;
+	private final TypeBaseService<E, C> service;
 
 	@Autowired
 	protected TypeBaseBusinessImpl(Entity2Model entity2Model, TypeBaseService<E, C> service) {
@@ -27,8 +28,8 @@ public abstract class TypeBaseBusinessImpl<E extends TypeBaseEntity, M extends T
 		this.service = service;
 	}
 
-	public List<M> findAll() {
-		List<M> rtn = new ArrayList<>();
+	public Set<M> findAll() {
+		Set<M> rtn = new HashSet<>();
 		List<E> found = service.findAll();
 		found.forEach(f -> rtn.add(entity2Model.mapper(f, getModelClass())));
 		return rtn;

@@ -1,4 +1,4 @@
-package rjr.studio.passgate.api.view.model;
+package rjr.studio.passgate.api.view;
 
 import java.util.Set;
 
@@ -7,7 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import rjr.studio.passgate.api.view.model.type.TypeRole;
+import rjr.studio.passgate.api.view.type.TypeApp;
+import rjr.studio.passgate.api.view.type.TypeRole;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
@@ -23,5 +24,6 @@ public class User extends BaseModel {
 	private String username;
 	private String password;
     private Set<TypeRole> roles;
+    private Set<TypeApp> apps;
 
 }

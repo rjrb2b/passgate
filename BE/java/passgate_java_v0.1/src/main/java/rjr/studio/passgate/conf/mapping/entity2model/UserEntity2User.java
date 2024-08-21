@@ -6,7 +6,7 @@ import com.github.dozermapper.core.loader.DozerBuilder;
 import com.github.dozermapper.core.loader.api.BeanMappingBuilder;
 import com.github.dozermapper.core.loader.api.FieldsMappingOptions;
 
-import rjr.studio.passgate.api.view.model.User;
+import rjr.studio.passgate.api.view.User;
 import rjr.studio.passgate.conf.mapping.DozerMapping;
 import rjr.studio.passgate.conf.mapping.converter.ObscurePasswordConverter;
 import rjr.studio.passgate.dao.entity.UserEntity;

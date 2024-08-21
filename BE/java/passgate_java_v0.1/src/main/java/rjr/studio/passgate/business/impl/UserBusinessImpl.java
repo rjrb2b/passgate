@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
-import rjr.studio.passgate.api.view.model.User;
+import rjr.studio.passgate.api.view.User;
 import rjr.studio.passgate.business.UserBusiness;
 import rjr.studio.passgate.conf.mapping.Entity2Model;
 import rjr.studio.passgate.dao.entity.UserEntity;

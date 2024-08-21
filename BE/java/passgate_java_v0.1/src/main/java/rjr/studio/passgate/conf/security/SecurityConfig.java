@@ -15,12 +15,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private UserDetailsService userDetailsService;
+	private CacheControlFilter cacheControlFilter;
 	private JwtAuthenticationFilter jwtAuthenticationFilter;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
-	public SecurityConfig(UserDetailsService userDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	public SecurityConfig(UserDetailsService userDetailsService, CacheControlFilter cacheControlFilter,
+			JwtAuthenticationFilter jwtAuthenticationFilter, BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.userDetailsService = userDetailsService;
+		this.cacheControlFilter = cacheControlFilter;
 		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
@@ -33,14 +36,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		try {
 		//@formatter:off
 		http.csrf().disable()
 			.authorizeRequests()
-				.antMatchers("/public/**").permitAll()
+				.antMatchers("/test/check/all").permitAll()
+				.antMatchers("/login/match").permitAll()
+				.antMatchers("/test/check/login").authenticated()
+				.antMatchers("/test/check/roles").hasAnyRole("SYSTEM", "ADMIN")
 				.anyRequest().authenticated()
 				.and()
+			.addFilterBefore(cacheControlFilter, UsernamePasswordAuthenticationFilter.class)
 			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 		//@formatter:on
+		} catch (Exception e) {
+			System.out.println("***************** ERRORE DA MODIFICARE *****************");
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

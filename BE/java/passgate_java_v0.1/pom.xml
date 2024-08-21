@@ -9,7 +9,7 @@
 	<version>0.1</version>
 	<name>passgate</name>
 	<description>Passgate BE Java 052024</description>
-	
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -46,6 +46,12 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.9</version>
+		</dependency>
+
 
 		<!-- MAPPER -->
 		<dependency>
@@ -104,5 +110,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>

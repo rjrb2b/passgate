@@ -15,6 +15,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import rjr.studio.passgate.dao.entity.type.TypeAppEntity;
 import rjr.studio.passgate.dao.entity.type.TypeRoleEntity;
 
 @Data
@@ -46,5 +47,13 @@ public class UserEntity extends BaseEntity {
         inverseJoinColumns = @JoinColumn(name = "ROLE_CODE")
     )
     private Set<TypeRoleEntity> roles;
+	
+	@ManyToMany
+    @JoinTable(
+        name = "ACCOUNTS_APPS",
+        joinColumns = @JoinColumn(name = "ACCOUNT_ID"),
+        inverseJoinColumns = @JoinColumn(name = "APP_CODE")
+    )
+    private Set<TypeAppEntity> apps;
 
 }

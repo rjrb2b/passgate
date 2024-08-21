@@ -1,14 +1,14 @@
 package rjr.studio.passgate.business.type;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
-import rjr.studio.passgate.api.view.model.type.TypeBaseModel;
+import rjr.studio.passgate.api.view.type.TypeBaseModel;
 import rjr.studio.passgate.dao.entity.type.TypeBaseEntity;
 
 public interface TypeBaseBusiness<E extends TypeBaseEntity, M extends TypeBaseModel, C extends Serializable> {
 	
-	List<M> findAll();
+	Set<M> findAll();
 	
 	M findByCode(C code);
 	

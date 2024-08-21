@@ -3,6 +3,8 @@ package rjr.studio.passgate.conf.security;
 import java.security.Key;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -18,11 +20,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.IOException;
 import io.jsonwebtoken.security.Keys;
 import rjr.studio.passgate.dao.entity.UserEntity;
+import rjr.studio.passgate.dao.entity.type.TypeRoleEntity;
 
 @Component
 public class JwtTokenProvider {
 
-	private final Integer EXPIRATION_TIME = 5 * 60 * 1000; // m * s * 1000
+	private final Integer EXPIRATION_TIME = 1000 * 60 * 60; // 1000 * 60 seconds * minutes
 	private final String SECRET_KEY = "b5840bef8a0e3ed1a923f820a8611aa27ca196a8468dd9a9d499459148931d47";
 
 	// Metodo per generare il token JWT
@@ -32,7 +35,7 @@ public class JwtTokenProvider {
 		//@formatter:off
 		return Jwts.builder()
 				.setSubject(userEntity.getUsername())
-				.claim("roles", userEntity.getRoles())
+				.claim("roles", this.rolesName(userEntity.getRoles()))
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(new Date().getTime() + EXPIRATION_TIME))
 				.signWith(key, SignatureAlgorithm.HS512)
@@ -86,13 +89,16 @@ public class JwtTokenProvider {
 
 	private Claims getAllClaimsFromToken(String token) {
 		//@formatter:off
-		Claims claims = Jwts.parserBuilder()
+		return Jwts.parserBuilder()
 				.setSigningKey(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()))
 				.build()
 				.parseClaimsJws(token)
 				.getBody();
 		//@formatter:on
-		return claims;
+	}
+
+	private Set<String> rolesName(Set<TypeRoleEntity> roles) {
+		return roles.stream().map(TypeRoleEntity::getName).collect(Collectors.toSet());
 	}
 
 }

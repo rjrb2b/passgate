@@ -4,12 +4,12 @@ import org.springframework.stereotype.Component;
 
 import com.github.dozermapper.core.loader.api.BeanMappingBuilder;
 
-import rjr.studio.passgate.api.view.type.TypeRole;
+import rjr.studio.passgate.api.view.type.TypeApp;
 import rjr.studio.passgate.conf.mapping.DozerMapping;
-import rjr.studio.passgate.dao.entity.type.TypeRoleEntity;
+import rjr.studio.passgate.dao.entity.type.TypeAppEntity;
 
 @Component
-public class TypeRoleEntity2TypeRole implements DozerMapping {
+public class TypeAppEntity2TypeApp implements DozerMapping {
 	
 	@Override
 	public BeanMappingBuilder get() {
@@ -17,7 +17,7 @@ public class TypeRoleEntity2TypeRole implements DozerMapping {
 
 			@Override
 			protected void configure() {
-				mapping(TypeRoleEntity.class, TypeRole.class)
+				mapping(TypeAppEntity.class, TypeApp.class)
 				;
 			}
 		};
